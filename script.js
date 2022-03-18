@@ -31,7 +31,7 @@ function computerPlay() { // computer's move
 }
 
 function playRound(playerSelection, computerSelection) {
-    let playerLowerCase = playerSelection.toLowerCase();
+    let playerLowerCase = playerSelection.toLowerCase(); // case INsensitivity
 
     switch (playerLowerCase) {
         case 'rock':
@@ -65,3 +65,30 @@ function playRound(playerSelection, computerSelection) {
             }
     }
 }
+
+function game() {
+    let userScore = 0;
+    let computerScore = 0;
+
+    for (let i=0; i<5; i++) { // play 5 rounds
+        let userMove = prompt("Enter your move: "); // get user move
+        let computerMove = computerPlay();
+
+        let result = playRound(userMove, computerMove);
+
+        if (result === "It's a tie!") { // if they tie,
+            alert(result);
+            continue; // no one scores
+        } else {
+            (result.substring(4,7) === "Win") ? // if user won,
+                userScore++ : // increase user's score
+                computerScore++; // else, increase computer's score
+        }
+
+        alert(result);
+        console.log("=== Scores ===");
+        console.log(`User: ${userScore}\nComputer: ${computerScore}`);
+    }
+}
+
+game();
