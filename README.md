@@ -1,1 +1,2 @@
-# rock-paper-scissors
+# Rock Paper Scissors
+This is a simple JS implementation of Rock-Paper-Scissors. It is part of [TOP](https://www.theodinproject.com/paths/foundations/courses/foundations/lessons/rock-paper-scissors)'s foundations [path](https://www.theodinproject.com/paths/foundations/courses/foundations).
