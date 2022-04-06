@@ -50,15 +50,19 @@ function playRound(playerSelection, computerSelection) {
 function game() {
     let userScore = 0;
     let computerScore = 0;
+    let predictMove = computerPlay();
+
+    console.log(`computer will play ${predictMove}`);
+
+    
 
     const buttons = document.querySelectorAll("button");
 
     buttons.forEach((button) => button.addEventListener('click', () => {
         let userMove = button.id;
-        let computerMove = computerPlay();
+        let computerMove = predictMove;
         
         let result = playRound(userMove, computerMove);
-
 
         if (result !== "It's a tie!") { // if they tie, no one scores
             (result.substring(4,7) === "Win") ? // if user won,
@@ -70,6 +74,9 @@ function game() {
         console.log(result);
         console.log("=== Scores ===");
         console.log(`User: ${userScore}\nComputer: ${computerScore}`);
+
+        predictMove = computerPlay();
+        console.log(`computer will play ${predictMove}`);
     }));
 
     // declare winner
