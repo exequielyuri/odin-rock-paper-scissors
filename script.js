@@ -47,61 +47,58 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-game: function game() {
-    let userScore = 0;
-    let computerScore = 0;
-    let predictMove = computerPlay();
-
-    const predict = document.querySelector("#predict");
-    predict.textContent = `Computer will play: ${predictMove}`;
-
-    const buttons = document.querySelectorAll("button");
-    const score = document.querySelector("#score");
-    const health = document.querySelector("#health");
-    const outcome = document.querySelector("#outcome");
-    const explanation = document.querySelector("#explanation");
+function game(event) {
+    let userMove = event.target.id;
+    let computerMove = predictMove;
     
+    let result = playRound(userMove, computerMove);
 
-    outcome.textContent = "Jan, Ken, Pon!";
-    explanation.textContent = "Choose your move!";
+    if (result === "It's a tie!") { // tie
+        outcome.textContent = "Oops, a tie!";
+        explanation.textContent = "No score given...";
+    } else if (result.substring(4,7) === "Win") { // user won
+        userScore++;
+        outcome.textContent = result.substring(0,8);
+        explanation.textContent = result.substring(9);
+    } else { // user lost
+        computerScore++;
+        outcome.textContent = result.substring(0,9);
+        explanation.textContent = result.substring(10);
+    }
 
+    // change html displays
+    score.textContent = `Score: ${userScore}/5`;
+    health.textContent = `Health: ${5-computerScore}/5`;
 
-    buttons.forEach((button) => button.addEventListener('click', () => {
-        let userMove = button.id;
-        let computerMove = predictMove;
-        
-        let result = playRound(userMove, computerMove);
+    if (userScore>=5) {
+        outcome.textContent = "Congratulations You Won!";
+        explanation.textContent = "Press reset for a new one...";
+        buttons.forEach((button) => button.removeEventListener('click', game));
+    } else if (computerScore>=5) {
+        outcome.textContent = "Oh, better luck next time...";
+        explanation.textContent = "Press reset for a new one...";
+        buttons.forEach((button) => button.removeEventListener('click', game));
+    }
 
-        if (result === "It's a tie!") { // tie
-            outcome.textContent = "Oops, a tie!";
-            explanation.textContent = "No score given...";
-        } else if (result.substring(4,7) === "Win") { // user won
-            userScore++;
-            outcome.textContent = result.substring(0,8);
-            explanation.textContent = result.substring(9);
-        } else { // user lost
-            computerScore++;
-            outcome.textContent = result.substring(0,9);
-            explanation.textContent = result.substring(10);
-        }
-
-        // change html displays
-        score.textContent = `Score: ${userScore}/5`;
-        health.textContent = `Health: ${5-computerScore}/5`;
-
-        if (userScore>=5) {
-            outcome.textContent = "Congratulations You Won!";
-            explanation.textContent = "Press reset for a new one...";
-            return game; // end game
-        } else if (computerScore>=5) {
-            outcome.textContent = "Oh, better luck next time...";
-            explanation.textContent = "Press reset for a new one...";
-            return game;
-        }
-
-        predictMove = computerPlay();
-        predict.textContent = `Computer will play: ${predictMove}`;
-    }));
+    predictMove = computerPlay();
+    predict.textContent = `Computer will play: ${predictMove}`;
 }
 
-game();
+let userScore = 0;
+let computerScore = 0;
+let predictMove = computerPlay();
+
+const predict = document.querySelector("#predict");
+const buttons = document.querySelectorAll("button");
+const score = document.querySelector("#score");
+const health = document.querySelector("#health");
+const outcome = document.querySelector("#outcome");
+const explanation = document.querySelector("#explanation");
+
+predict.textContent = `Computer will play: ${predictMove}`;
+score.textContent = "Score: 0/5";
+health.textContent = "Health: 5/5";
+outcome.textContent = "Jan, Ken, Pon!";
+explanation.textContent = "Choose your move!";
+
+buttons.forEach((button) => button.addEventListener('click', game));
