@@ -89,3 +89,15 @@ button {
         background-color: gray;
     }
 }
+
+@media (max-width: 600px) {
+    body {
+        transform: scale(0.9);
+    }
+}
+
+@media (max-width: 500px) {
+    body {
+        transform: scale(0.8);
+    }
+}
