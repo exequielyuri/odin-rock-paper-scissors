@@ -47,7 +47,7 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-function game() {
+game: function game() {
     let userScore = 0;
     let computerScore = 0;
     let predictMove = computerPlay();
@@ -62,6 +62,10 @@ function game() {
     const explanation = document.querySelector("#explanation");
     
 
+    outcome.textContent = "Jan, Ken, Pon!";
+    explanation.textContent = "Choose your move!";
+
+
     buttons.forEach((button) => button.addEventListener('click', () => {
         let userMove = button.id;
         let computerMove = predictMove;
@@ -69,8 +73,8 @@ function game() {
         let result = playRound(userMove, computerMove);
 
         if (result === "It's a tie!") { // tie
-            outcome.textContent = result;
-            explanation.textContent = "";
+            outcome.textContent = "Oops, a tie!";
+            explanation.textContent = "No score given...";
         } else if (result.substring(4,7) === "Win") { // user won
             userScore++;
             outcome.textContent = result.substring(0,8);
@@ -83,14 +87,20 @@ function game() {
 
         // change html displays
         score.textContent = `Score: ${userScore}/5`;
-        health.textContent = `Health: ${1-computerScore}/1`;
+        health.textContent = `Health: ${5-computerScore}/5`;
+
+        if (userScore>=5) {
+            outcome.textContent = "Congratulations You Won!";
+            explanation.textContent = "Press reset for a new one...";
+            return game; // end game
+        } else if (computerScore>=5) {
+            outcome.textContent = "Oh, better luck next time...";
+            explanation.textContent = "Press reset for a new one...";
+            return game;
+        }
 
         predictMove = computerPlay();
         predict.textContent = `Computer will play: ${predictMove}`;
-
-        // add if 4/5 wins
-
-        // announce winner if 5 wins or 0 health
     }));
 }
 
