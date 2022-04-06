@@ -68,15 +68,15 @@ function game(event) {
 
     // change html displays
     score.textContent = `Score: ${userScore}/5`;
-    health.textContent = `Health: ${5-computerScore}/5`;
+    health.textContent = `Health: ${1-computerScore}/1`;
 
     if (userScore>=5) {
         outcome.textContent = "Congratulations You Won!";
         explanation.textContent = "Press reset for a new one...";
         buttons.forEach((button) => button.removeEventListener('click', game));
-    } else if (computerScore>=5) {
-        outcome.textContent = "Oh, better luck next time...";
-        explanation.textContent = "Press reset for a new one...";
+    } else if (computerScore>=1) {
+        outcome.textContent = "You lost?";
+        explanation.textContent = "This is awkward...";
         buttons.forEach((button) => button.removeEventListener('click', game));
     }
 
@@ -91,7 +91,7 @@ function newGame() {
     
     predict.textContent = `Computer will play: ${predictMove}`;
     score.textContent = "Score: 0/5";
-    health.textContent = "Health: 5/5";
+    health.textContent = "Health: 1/1";
     outcome.textContent = "Jan, Ken, Pon!";
     explanation.textContent = "Choose your move!";
     buttons.forEach((button) => button.addEventListener('click', game));
@@ -111,7 +111,7 @@ const reset = document.querySelector("#reset");
 
 predict.textContent = `Computer will play: ${predictMove}`;
 score.textContent = "Score: 0/5";
-health.textContent = "Health: 5/5";
+health.textContent = "Health: 1/1";
 outcome.textContent = "Jan, Ken, Pon!";
 explanation.textContent = "Choose your move!";
 
