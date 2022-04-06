@@ -1,22 +1,3 @@
-/*
-== pseudocode ==
-
-Get 2 inputs
-    - from user
-    - from computer
-        - generate random number 0 - 2
-            - 0: rock
-            - 1: paper
-            - 2: scissors 
-
-Compare who wins
-    - rock > scissors
-    - paper > rock
-    - scissors > paper
-
-Output: declare who wins
-*/
-
 function computerPlay() { // computer's move
     let randomNumber = Math.floor(Math.random()*3); // random 0-2
 
@@ -66,61 +47,32 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-function playRock() {
-    return playRound('rock', computerPlay());
-}
-
-function playPaper() {
-    return playRound('paper', computerPlay());
-}
-
-function playScissors() {
-    return playRound('scissors', computerPlay());
-}
-
 function game() {
     let userScore = 0;
     let computerScore = 0;
 
-    // select buttons
-    const rockBtn = document.querySelector("#rock");
-    const paperBtn = document.querySelector("#paper");
-    const scissorsBtn = document.querySelector("#scissors");
+    const buttons = document.querySelectorAll("button");
 
-    do {
+    buttons.forEach((button) => button.addEventListener('click', () => {
+        let userMove = button.id;
+        let computerMove = computerPlay();
+        
+        let result = playRound(userMove, computerMove);
 
-    } while (userScore<5 || computerScore<5);
+
+        if (result !== "It's a tie!") { // if they tie, no one scores
+            (result.substring(4,7) === "Win") ? // if user won,
+                userScore++ : // increase user's score
+                computerScore++; // else, increase computer's score
+        }
+
+        //console.log(`user: ${userMove}\ncomputer: ${computerMove}`);
+        console.log(result);
+        console.log("=== Scores ===");
+        console.log(`User: ${userScore}\nComputer: ${computerScore}`);
+    }));
 
     // declare winner
 }
-
-
-
-
-
-// function game() {
-//     let userScore = 0;
-//     let computerScore = 0;
-
-//     for (let i=0; i<5; i++) { // play 5 rounds
-//         let userMove = prompt("Enter your move: "); // get user move
-//         let computerMove = computerPlay();
-
-//         let result = playRound(userMove, computerMove);
-
-//         if (result === "It's a tie!") { // if they tie,
-//             alert(result);
-//             continue; // no one scores
-//         } else {
-//             (result.substring(4,7) === "Win") ? // if user won,
-//                 userScore++ : // increase user's score
-//                 computerScore++; // else, increase computer's score
-//         }
-
-//         alert(result);
-//         console.log("=== Scores ===");
-//         console.log(`User: ${userScore}\nComputer: ${computerScore}`);
-//     }
-// }
 
 game();
