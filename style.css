@@ -92,12 +92,24 @@ button {
 
 @media (max-width: 600px) {
     body {
-        transform: scale(0.9);
+        transform: scale(0.8);
     }
 }
 
 @media (max-width: 500px) {
     body {
-        transform: scale(0.8);
+        transform: scale(0.7);
+    }
+}
+
+@media (max-width: 400px) {
+    body {
+        transform: scale(0.6);
+    }
+}
+
+@media (max-width: 300px) {
+    body {
+        transform: scale(0.5);
     }
 }
