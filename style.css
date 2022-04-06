@@ -47,15 +47,12 @@ body {
     justify-content: space-around;
 }
 
-#predict {
-    margin-left: 125px;
-    text-align: left;
-}
+#predict {}
 #score {}
 #health {}
 
 #outcome {
-    font-size: 38px;
+    font-size: 33px;
     margin: 30px 0;
 }
 
