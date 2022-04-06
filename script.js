@@ -52,11 +52,14 @@ function game() {
     let computerScore = 0;
     let predictMove = computerPlay();
 
-    console.log(`computer will play ${predictMove}`);
-
-    
+    const predict = document.querySelector("#predict");
+    predict.textContent = `Computer will play: ${predictMove}`;
 
     const buttons = document.querySelectorAll("button");
+    const score = document.querySelector("#score");
+    const health = document.querySelector("#health");
+    const outcome = document.querySelector("#outcome");
+    
 
     buttons.forEach((button) => button.addEventListener('click', () => {
         let userMove = button.id;
@@ -70,13 +73,15 @@ function game() {
                 computerScore++; // else, increase computer's score
         }
 
-        //console.log(`user: ${userMove}\ncomputer: ${computerMove}`);
-        console.log(result);
-        console.log("=== Scores ===");
-        console.log(`User: ${userScore}\nComputer: ${computerScore}`);
+        // change html displays
+        score.textContent = `Score: ${userScore}/5`;
+        health.textContent = `Health: ${1-computerScore}/1`;
+        outcome.textContent = result;
 
         predictMove = computerPlay();
-        console.log(`computer will play ${predictMove}`);
+        predict.textContent = `Computer will play: ${predictMove}`;
+
+        // add if 4/5 wins
     }));
 
     // declare winner
