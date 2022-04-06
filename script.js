@@ -84,16 +84,30 @@ function game(event) {
     predict.textContent = `Computer will play: ${predictMove}`;
 }
 
+function newGame() {
+    userScore = 0;
+    computerScore = 0;
+    predictMove = computerPlay();
+    
+    predict.textContent = `Computer will play: ${predictMove}`;
+    score.textContent = "Score: 0/5";
+    health.textContent = "Health: 5/5";
+    outcome.textContent = "Jan, Ken, Pon!";
+    explanation.textContent = "Choose your move!";
+    buttons.forEach((button) => button.addEventListener('click', game));
+}
+
 let userScore = 0;
 let computerScore = 0;
 let predictMove = computerPlay();
 
 const predict = document.querySelector("#predict");
-const buttons = document.querySelectorAll("button");
+const buttons = document.querySelectorAll(".choice");
 const score = document.querySelector("#score");
 const health = document.querySelector("#health");
 const outcome = document.querySelector("#outcome");
 const explanation = document.querySelector("#explanation");
+const reset = document.querySelector("#reset");
 
 predict.textContent = `Computer will play: ${predictMove}`;
 score.textContent = "Score: 0/5";
@@ -102,3 +116,4 @@ outcome.textContent = "Jan, Ken, Pon!";
 explanation.textContent = "Choose your move!";
 
 buttons.forEach((button) => button.addEventListener('click', game));
+reset.addEventListener('click', newGame);
