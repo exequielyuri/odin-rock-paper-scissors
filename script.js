@@ -59,6 +59,7 @@ function game() {
     const score = document.querySelector("#score");
     const health = document.querySelector("#health");
     const outcome = document.querySelector("#outcome");
+    const explanation = document.querySelector("#explanation");
     
 
     buttons.forEach((button) => button.addEventListener('click', () => {
@@ -67,24 +68,30 @@ function game() {
         
         let result = playRound(userMove, computerMove);
 
-        if (result !== "It's a tie!") { // if they tie, no one scores
-            (result.substring(4,7) === "Win") ? // if user won,
-                userScore++ : // increase user's score
-                computerScore++; // else, increase computer's score
+        if (result === "It's a tie!") { // tie
+            outcome.textContent = result;
+            explanation.textContent = "";
+        } else if (result.substring(4,7) === "Win") { // user won
+            userScore++;
+            outcome.textContent = result.substring(0,8);
+            explanation.textContent = result.substring(9);
+        } else { // user lost
+            computerScore++;
+            outcome.textContent = result.substring(0,9);
+            explanation.textContent = result.substring(10);
         }
 
         // change html displays
         score.textContent = `Score: ${userScore}/5`;
         health.textContent = `Health: ${1-computerScore}/1`;
-        outcome.textContent = result;
 
         predictMove = computerPlay();
         predict.textContent = `Computer will play: ${predictMove}`;
 
         // add if 4/5 wins
-    }));
 
-    // declare winner
+        // announce winner if 5 wins or 0 health
+    }));
 }
 
 game();
