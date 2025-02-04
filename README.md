@@ -1,2 +1,2 @@
 # Rock Paper Scissors
-This is a simple JS implementation of [Rock-Paper-Scissors](https://www.theodinproject.com/paths/foundations/courses/foundations/lessons/rock-paper-scissors), as part of [TOP](https://www.theodinproject.com/) curriculum. I made it so that you can see the next move of your opponent.
+This is a simple JS implementation of Rock-Paper-Scissors, as part of [TOP](https://www.theodinproject.com/) curriculum. I made it so that you can see the next move of your opponent. A demo can be found [here](https://exequielyuri.github.io/odin-rock-paper-scissors/)
